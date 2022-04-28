@@ -1,6 +1,9 @@
 # java-discordbot
 java 로 만든 롤전적 검색 디스코드 봇 
 
+봇 링크 :
+https://discord.com/api/oauth2/authorize?client_id=969104921033068554&permissions=0&scope=bot
+
 # JDA
 
 JDA 란 JAVA DISCORD API 로써 , java 에서 discord api 를 이용하여 디스코드 봇 개발 하는데 필요한 api들을 제공합니다.
