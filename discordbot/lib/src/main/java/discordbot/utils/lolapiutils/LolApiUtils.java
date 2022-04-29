@@ -16,7 +16,7 @@ import org.json.simple.parser.JSONParser;
 import discordbot.utils.championNamingUtils.ChampionNamingUtils;
 
 public class LolApiUtils {
-	private final static String api_key = "RGAPI-bfb595ae-0c6e-4241-9a6f-b48c196e65cf";
+	private final static String api_key = "";
 
 	URL url = null;
 	HttpURLConnection conn = null;

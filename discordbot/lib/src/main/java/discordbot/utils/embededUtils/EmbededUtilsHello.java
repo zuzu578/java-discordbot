@@ -27,13 +27,14 @@ public class EmbededUtilsHello {
 
         // eb.addBlankField(false);
 
-        eb.setAuthor("by zuzu578", null,
-                "https://github.com/zuzu578/java-discordbot");
+        eb.setAuthor("by zuzu578", "https://github.com/zuzu578/java-discordbot",
+                "https://image.fmkorea.com/files/attach/new/20200729/14339012/2161370298/3011072320/901988f7f179347887cead25ee34c46a.jpg");
 
         // eb.setFooter("Text",
         // "https://github.com/zekroTJA/DiscordBot/blob/master/.websrc/zekroBot_Logo_-_round_small.png");
-        // eb.setImage("https://github.com/zekroTJA/DiscordBot/blob/master/.websrc/logo%20-%20title.png");
-        // eb.setThumbnail("https://github.com/zekroTJA/DiscordBot/blob/master/.websrc/logo%20-%20title.png");
+
+        eb.setThumbnail(
+                "https://images.mypetlife.co.kr/content/uploads/2019/12/09151959/%EC%8B%AC%EC%8B%AC%ED%95%9C_%EA%B3%A0%EC%96%91%EC%9D%B42.png");
 
         return eb;
     }

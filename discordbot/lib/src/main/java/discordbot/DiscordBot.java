@@ -22,7 +22,7 @@ import org.json.simple.JSONObject;
 
 public class DiscordBot extends ListenerAdapter {
 	private boolean isCalled = false;
-
+	private boolean isFirstHello = false;
 	private String type = "";
 	private final static String token = "";
 
@@ -46,8 +46,12 @@ public class DiscordBot extends ListenerAdapter {
 
 		EmbededUtilsHello sayHello = new EmbededUtilsHello();
 		EmbedBuilder hello = sayHello.sayHello();
-		// 첫 인삿말
-		channel.sendMessage(hello.build()).queue();
+
+		// 첫 인삿말 인경우 첫 메시지를 띄웁니다.
+		if (!isFirstHello) {
+			channel.sendMessage(hello.build()).queue();
+			isFirstHello = true;
+		}
 
 		if (msg.getContentRaw().contains(("!챔피언정보"))) {
 			isCalled = true;
