@@ -1,4 +1,4 @@
-package discordbot.embededUtils;
+package discordbot.utils.embededUtils;
 
 import java.awt.Color;
 import java.util.List;

@@ -1,4 +1,4 @@
-package discordbot.lolapiutils;
+package discordbot.utils.lolapiutils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -13,10 +13,10 @@ import org.json.simple.JSONObject;
 
 import org.json.simple.parser.JSONParser;
 
-import discordbot.championNamingUtils.ChampionNamingUtils;
+import discordbot.utils.championNamingUtils.ChampionNamingUtils;
 
 public class LolApiUtils {
-	private final static String api_key = "RGAPI-1ebc41c2-4d8b-4b6a-bf07-be8032b471f1";
+	private final static String api_key = "RGAPI-bfb595ae-0c6e-4241-9a6f-b48c196e65cf";
 
 	URL url = null;
 	HttpURLConnection conn = null;
@@ -33,7 +33,7 @@ public class LolApiUtils {
 
 		try {
 
-			url = new URL(api_url + summonerName + "?" + "api_key=" + api_key);
+			url = new URL(api_url + summonerName.replace(" ", "") + "?" + "api_key=" + api_key);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
 			connection.setRequestMethod("GET");
@@ -139,7 +139,7 @@ public class LolApiUtils {
 
 			ChampionNamingUtils c1 = new ChampionNamingUtils();
 
-			result = c1.changeNameByIdx((JSONArray) j1.get("freeChampionIds"));
+			result = c1.changeNameByIdx((JSONArray) j1.get("freeChampionIds"), "", "rotation");
 
 		} catch (Exception e) {
 			e.printStackTrace();
