@@ -24,15 +24,7 @@ public class EmbededUtilsRotationChampions {
         eb.setColor(new Color(0xF40C0C));
         eb.setColor(new Color(255, 0, 54));
 
-        /*
-         * Set the text of the Embed:
-         * Arg: text as string
-         */
-
-        /*
-         * Add spacer like field
-         * Arg: inline mode true / false
-         */
+        eb.setDescription(championList.toString());
         eb.addBlankField(false);
 
         eb.setImage(

@@ -20,7 +20,7 @@ import org.json.simple.JSONObject;
 public class DiscordBot extends ListenerAdapter {
 	private boolean isCalled = false;
 
-	private final static String token = "OTY5MTA0OTIxMDMzMDY4NTU0.YmojSg.mQafcUNlUcC_Z904VQ59Wvmk3NQ";
+	private String type = "";
 
 	public static void main(String[] args) throws LoginException {
 		JDA jda = JDABuilder.createDefault(token).build();
@@ -39,16 +39,24 @@ public class DiscordBot extends ListenerAdapter {
 		if (event.getAuthor().isBot()) {
 			return;
 		}
+		if (msg.getContentRaw().contains(("!챔피언정보"))) {
+			isCalled = true;
+			type = "champion";
+			channel.sendMessage("챔피언 영문이름을 입력해주세요.😇").queue();
+		}
 		if (msg.getContentRaw().contains("!전적검색")) {
 			isCalled = true;
+			type = "search";
 			channel.sendMessage("닉네임을 입력해주세요.😇").queue();
 		}
 		if (msg.getContentRaw().contains("!이번주로테이션")) {
+
 			isCalled = true;
 			List<Object> rotationChampionsList = api.getRotationChampionList();
 
 			EmbededUtilsRotationChampions em = new EmbededUtilsRotationChampions();
 			EmbedBuilder eb;
+
 			for (int i = 0; i < rotationChampionsList.size(); i++) {
 				eb = em.rotationChampionsListBuilder(rotationChampionsList.get(i));
 				channel.sendMessage(eb.build()).queue();
@@ -57,7 +65,7 @@ public class DiscordBot extends ListenerAdapter {
 			isCalled = false;
 
 		}
-		if (isCalled == true && !msg.getContentRaw().contains("!")) {
+		if (isCalled == true && !msg.getContentRaw().contains("!") && type.equals("search")) {
 			JSONObject result = api.getSummonerInfo(msg.getContentRaw());
 
 			if (result.size() == 0) {
@@ -69,6 +77,13 @@ public class DiscordBot extends ListenerAdapter {
 			EmbedBuilder eb = em.summonerInfoBuilder(result);
 
 			channel.sendMessage(eb.build()).queue();
+
+			isCalled = false;
+		}
+
+		if (isCalled == true && !msg.getContentRaw().contains("!") && type.equals("champion")) {
+
+			channel.sendMessage(msg.getContentRaw()).queue();
 
 			isCalled = false;
 		}
