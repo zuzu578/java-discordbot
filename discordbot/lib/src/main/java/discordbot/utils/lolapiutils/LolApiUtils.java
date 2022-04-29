@@ -16,7 +16,7 @@ import org.json.simple.parser.JSONParser;
 import discordbot.utils.championNamingUtils.ChampionNamingUtils;
 
 public class LolApiUtils {
-	private final static String api_key = "";
+	private final static String api_key = "RGAPI-bfb595ae-0c6e-4241-9a6f-b48c196e65cf";
 
 	URL url = null;
 	HttpURLConnection conn = null;
@@ -27,13 +27,14 @@ public class LolApiUtils {
 
 	public JSONObject getSummonerInfo(String summonerName) {
 
-		String api_url = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/";
+		String api_url = "";
 
 		JSONObject result = new JSONObject();
 
 		try {
 
-			url = new URL(api_url + summonerName.replace(" ", "") + "?" + "api_key=" + api_key);
+			url = new URL(api_url + summonerName.replace(" ", "%20") + "?" + "api_key=" + api_key);
+			System.out.println("url =========> " + url);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
 			connection.setRequestMethod("GET");
