@@ -73,7 +73,7 @@ public class DiscordBot extends ListenerAdapter {
 		if (msg.getContentRaw().equals("!킥")) {
 
 			channel.sendMessage("킥 할 유저를 태그해줘.").queue();
-			isCalled = false;
+			isCalled = true;
 			type = "kick";
 
 		}
@@ -83,13 +83,10 @@ public class DiscordBot extends ListenerAdapter {
 			Guild guild = event.getGuild();
 			Member target = event.getMessage().getMentionedMembers().get(0);
 
-			if (event.getMessage().getMentionedMembers().isEmpty()) {
-				System.out.println(" 닉네임을 입력해주세요.");
-			}
 			// if exists
 			guild.kick(target, "킥 사유").queue();
 			isCalled = false;
-			channel.sendMessage("잘가시게~~~~").queue();
+			channel.sendMessage("has been kicked!!!").queue();
 
 		}
 		if (isCalled == true && !msg.getContentRaw().contains("!") && type.equals("ban")) {
@@ -97,14 +94,11 @@ public class DiscordBot extends ListenerAdapter {
 			Guild guild = event.getGuild();
 			Member target = event.getMessage().getMentionedMembers().get(0);
 
-			if (event.getMessage().getMentionedMembers().isEmpty()) {
-				System.out.println(" 닉네임을 입력해주세요.");
-			}
-			// if exists
+			// if exist
 			guild.ban(target, 0, "ban command").queue();
 			isCalled = false;
 
-			channel.sendMessage("잘가시게~~~~").queue();
+			channel.sendMessage("has been banned!").queue();
 		}
 
 		if (!isFirstHello || msg.getContentRaw().equals("!help")) {
