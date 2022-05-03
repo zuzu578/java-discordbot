@@ -17,7 +17,8 @@ import discordbot.utils.messagebuilder.SongInfoMessageBuilder;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -25,7 +26,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class DiscordBot extends ListenerAdapter {
 
-	private final static String token = "OTY5OTI2ODY1NzczMDEwOTQ1.Ym0gyQ.tbzN0U3EaeUA9FPBYdm5iIQM4gw";
+	private final static String token = "OTY5OTI2ODY1NzczMDEwOTQ1.Ym0gyQ.NUll-UQCMgPj14K_N6HgKM6SOYY";
 	private Dbcp db = new Dbcp();
 	private boolean isCalled = false;
 	private String type = "";
@@ -59,6 +60,33 @@ public class DiscordBot extends ListenerAdapter {
 		// 봇끼리 대화 감지 금지
 		if (event.getAuthor().isBot()) {
 			return;
+		}
+
+		// guild ban
+		if (msg.getContentRaw().equals("!밴")) {
+
+			channel.sendMessage("밴할 id 를 입력해줘").queue();
+			isCalled = true;
+			type = "ban";
+		}
+
+		if (isCalled == true && !msg.getContentRaw().contains("!") && type.equals("ban")) {
+
+			Guild guild = event.getGuild();
+			Member target = event.getMessage().getMentionedMembers().get(0);
+
+			if (event.getMessage().getMentionedMembers().isEmpty()) {
+				System.out.println(" 닉네임을 입력해주세요.");
+			}
+			System.out.println("target.getNickname();" + target.getNickname());
+			// if exists
+			guild.ban(target, 0, "ban command").queue();
+			// Guild guild = event.getGuild();
+			// Member member = event.getMember().getAsMention();
+			// event.getGuild().ban("#8089", 1, "테스트 사유").queue();
+			isCalled = false;
+
+			channel.sendMessage("밴함").queue();
 		}
 
 		if (!isFirstHello || msg.getContentRaw().equals("!help")) {

@@ -39,6 +39,7 @@ public class ExcelGenerator {
             cell = row.createCell(1);
             cell.setCellValue(result.get("songGenreList").get(i));
             cell = row.createCell(2);
+
             cell.setCellValue(result.get("difficultList").get(i));
             cell = row.createCell(3);
 
